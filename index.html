@@ -14,13 +14,13 @@
 
 	<body>
 		<div class="login">
-			<p>为防止代码泄漏，请先对暗号</p>
-			<p>天王盖地虎,下一句是：</p>
+			<p>为防止代码泄漏，请先回答问题</p>
+			<p>蜗牛最喜欢吃的东西是：</p>
 			<hr class="hr"/>
 			<div class="options">
-				<p class="item">宝塔镇河妖 <span class="checked"><img src="check.png"/></span></p>
-				<p class="item">小鸡炖蘑菇 <span class="checked"><img src="check.png"/></span></p>
-				<p class="item">可爱小尼姑 <span class="checked"><img src="check.png"/></span></p>
+				<p class="item">螺蛳粉 <span class="checked"><img src="check.png"/></span></p>
+				<p class="item">烤榴莲 <span class="checked"><img src="check.png"/></span></p>
+				<p class="item">小包子 <span class="checked"><img src="check.png"/></span></p>
 			</div>
 			<div class="login-button-wrap">
 				<div class="login-button">
@@ -32,12 +32,15 @@
 			<img id="bgimg" src="timg.jpg">
 		</div>
 		<div class="text3">
-				<p>龙叔给你买的烟花已放完了，如果还想放烟花，继续点击屏幕</p>
-				<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=826327700&site=qq&menu=yes" class="button">你还可以送一朵小红花</a>
+				<p>给你买的烟花已放完了，如果还想放烟花，继续点击屏幕</p>
+				<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=826327700&site=qq&menu=yes" class="button">你还可以送一个么么哒</a>
 			</div>
 		<script src="jquery.min.js"></script>
 		<script>
 			$(function() {
+				var baseImg = new Image()
+				baseImg.src = "2019.png"
+
 				var item=$('.options .item')
 				item.click(function(){
 					var i=$(this).index()
@@ -157,7 +160,7 @@
 							e=e.originalEvent.targetTouches[0]
 							self.fashe(e)
 						})
-						var text = "如果一句“元旦快乐”不足以表达我深深的祝福，那么我只能用代码，为你敲下新年的烟花。希望小小诗快乐长大、少掉头发...（喂，别拿电锯，好好看烟花..）",
+						var text = "大年初一，新春快乐！在一起的2710个日日夜夜，感谢有你，爱你的小包子，么么哒。作为程序猿，给你放点烟花，哈哈！",
 							i = 1
 						innerText = setInterval(function() {
 							self.innerText(text.substring(0, i))
@@ -187,51 +190,54 @@
 								if(d == 15){
 									$('.text1').css('opacity',0)
 								}
-								if(d >= 20) {
+								if(d >= 30) {
 									self.autofinish=true
-									for(var i = 1; i < 20; i++) {
+									for(var i = 1; i < 30; i++) {
 										self.createFireworks(self.cw / 2, self.ch, self.mx, self.my);
 									}
 									clearInterval(autoplayTime)
 									var text2 = document.createElement('canvas')
 									text2.width = $(window).innerWidth();
-									text2.height = 100;
-									text2.style.top = (self.ch / 2 - 100) + 'px'
+									text2.height = 200;
+									text2.style.top = (self.ch / 2 - 200) + 'px'
 									text2.style.zIndex = 19
 									$(document.body).append(text2);
 									var ctx = text2.getContext('2d')
-									var baseImg = new Image()
-									baseImg.src = "11.png"
-									baseImg.onload = function() {
-										ctx.drawImage(baseImg, 20, 10, text2.width-40, 80);
-										var dots = []
-										var img = ctx.getImageData(0, 0, text2.width, text2.height); //getImageData，专门用于获取图片数据，这里直接取了整个Canvas
-										ctx.clearRect(0, 0, text2.width, text2.height); //清空画布，就是把之前的文字清空，因为后面要以粒子（应该叫小圆圈）代替
-										for(var y = 0; y < img.height; y += 7) { //y+=3，是因为如果按像素取，有效值非常多，所以这里就每隔3像素取一点
-											for(var x = 0; x < img.width; x += 7) { //y是高，x是宽
-												var i = (x + y * img.width) * 4; //这边就从左往右，从上往下；500X300的大小，会取166×100个像素点；×4则是因为rgba()
-												var dot = {
-													x: 0,
-													y: 0
-												};
-												if(img.data[i + 3] >= 128) { //因为img.data中包含了每个像素点的rgba，＋3表示取a的值
-													dot.x = x;
-													dot.y = y;
-													dots.push(dot); //将每个满足条件的xy Add到dots数组中
-												}
+									
+									setTimeout(function(){
+										ctx.drawImage(baseImg, 20, 10, text2.width-40, 140);
+										$('.text3').css('opacity',1)
+									},1500)
+									// baseImg.onload = function() {
+									// 	ctx.drawImage(baseImg, 20, 10, text2.width-40, 140);
+									// 	// var dots = []
+									// 	// var img = ctx.getImageData(0, 0, text2.width, text2.height); //getImageData，专门用于获取图片数据，这里直接取了整个Canvas
+									// 	// ctx.clearRect(0, 0, text2.width, text2.height); //清空画布，就是把之前的文字清空，因为后面要以粒子（应该叫小圆圈）代替
+									// 	// for(var y = 0; y < img.height; y += 3) { //y+=3，是因为如果按像素取，有效值非常多，所以这里就每隔3像素取一点
+									// 	// 	for(var x = 0; x < img.width; x += 3) { //y是高，x是宽
+									// 	// 		var i = (x + y * img.width) * 4; //这边就从左往右，从上往下；500X300的大小，会取166×100个像素点；×4则是因为rgba()
+									// 	// 		var dot = {
+									// 	// 			x: 0,
+									// 	// 			y: 0
+									// 	// 		};
+									// 	// 		if(img.data[i + 3] >= 128) { //因为img.data中包含了每个像素点的rgba，＋3表示取a的值
+									// 	// 			dot.x = x;
+									// 	// 			dot.y = y;
+									// 	// 			dots.push(dot); //将每个满足条件的xy Add到dots数组中
+									// 	// 		}
 
-											}
-										}
-										setTimeout(function(){
-											setInterval(function(){
-												drawText2(dots,ctx)
-											},100)
-										},500)
-										setTimeout(function(){
-											$('.text3').css('opacity',1)
-										},1500)
+									// 	// 	}
+									// 	// }
+									// 	// setTimeout(function(){
+									// 	// 	setInterval(function(){
+									// 	// 		drawText2(dots,ctx)
+									// 	// 	},100)
+									// 	// },500)
+									// 	// setTimeout(function(){
+									// 	// 	$('.text3').css('opacity',1)
+									// 	// },1500)
 										
-									}
+									// }
 									function drawText2(dots,ctx){
 										for(var m = 0; m < dots.length; m++) { //遍历数组，将每个数组的xy以圆的方式展出
 											//document.write(dots[m].x + "&nbsp;" + dots[m].y + "</br>");//瞄一瞄每个坐标
@@ -488,23 +494,25 @@
 					self.fashe = function(e) {
 						if(self.autofinish){
 							$('.text3 p').remove()
+						}else{
+							return false
 						}
+						self.mx = e.pageX - self.canvas.offsetLeft;
+						self.my = e.pageY - self.canvas.offsetTop;
+						self.currentHue = rand(self.hueMin, self.hueMax);
+						self.createFireworks(self.cw / 2, self.ch, self.mx, self.my);
+						$(self.canvas).on('mousemove.fireworks', function(e) {
 							self.mx = e.pageX - self.canvas.offsetLeft;
 							self.my = e.pageY - self.canvas.offsetTop;
 							self.currentHue = rand(self.hueMin, self.hueMax);
 							self.createFireworks(self.cw / 2, self.ch, self.mx, self.my);
-							$(self.canvas).on('mousemove.fireworks', function(e) {
-								self.mx = e.pageX - self.canvas.offsetLeft;
-								self.my = e.pageY - self.canvas.offsetTop;
-								self.currentHue = rand(self.hueMin, self.hueMax);
-								self.createFireworks(self.cw / 2, self.ch, self.mx, self.my);
-							});
-						},
-						self.clear = function() {
-							self.particles = [];
-							self.fireworks = [];
-							self.ctx.clearRect(0, 0, self.cw, self.ch);
-						};
+						});
+					},
+					self.clear = function() {
+						self.particles = [];
+						self.fireworks = [];
+						self.ctx.clearRect(0, 0, self.cw, self.ch);
+					};
 					self.canvasLoop = function() {
 						requestAnimFrame(self.canvasLoop, self.canvas);
 						self.ctx.globalCompositeOperation = 'destination-out';
